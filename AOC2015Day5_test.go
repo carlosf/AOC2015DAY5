@@ -11,11 +11,11 @@ func Test_isLineNice(t *testing.T) {
 		args args
 		want bool
 	}{
-		{"vowel1", args{s: "aei"}, true},
-		{"noVowels", args{s: "bcdfg"}, false},
-		{"repeatedChars", args{s: "aabbcc"}, true},
-		{"lessThanThreeVowels", args{s: "ae"}, false},
-		{"bothCriteria", args{s: "baae"}, true},
+		{"3 vowels double letter", args{s: "ugknbfddgicrmopn"}, true},
+		{"3 vowels and double letter", args{s: "aaa"}, true},
+		{"no double letter", args{s: "jchzalrnumimnmhp"}, false},
+		{"string xy", args{s: "haegwjzuvuyypxyu"}, false},
+		{"only one vowel", args{s: "dvszwmarrgswjxmb"}, false},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
