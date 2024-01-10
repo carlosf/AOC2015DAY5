@@ -17,6 +17,10 @@ func p(s string) {
 	fmt.Println(s)
 }
 
+func strRemoveAt(s string, index, length int) string {
+	return s[:index] + s[index+length:]
+}
+
 func isVowel(r rune) bool {
 	if r == 'a' || r == 'e' || r == 'i' || r == 'o' || r == 'u' {
 		return true
@@ -61,6 +65,45 @@ func isLineNice(s string) bool {
 	return (numVowels >= 3) && doubleChar && !forbiddenStrings
 }
 
+func isLineNice2(s string) bool {
+	var currChar rune
+	var doubleChar bool = false
+	var sb strings.Builder
+	var cleanStr string = ""
+	var stringtoCheck strings.Builder
+	var forbiddenStrings bool = false
+
+	//p(s)
+	key := 0
+	for key, currChar = range s {
+		// check for repeated characters
+		if key > 0 {
+			cleanStr = strRemoveAt(s, key-1, 2)
+			stringtoCheck.WriteString(string(currChar))
+			stringtoCheck.WriteString(string(s[key-1]))
+			if strings.Contains(cleanStr, stringtoCheck.String()) {
+				doubleChar = true
+				break
+			}
+			stringtoCheck.Reset()
+
+			sb.WriteString(string(s[key-1]))
+			sb.WriteString(string(currChar))
+
+			//p(sb.String())
+			if sb.String() == "ab" || sb.String() == "cd" || sb.String() == "pq" || sb.String() == "xy" {
+				forbiddenStrings = true
+				break
+				//fmt.Println("forbidden chars: ", sb.String())
+			}
+			sb.Reset()
+		}
+		//check to see if there is a 'ab', 'cd', 'pq', or 'xy'
+
+	}
+	return doubleChar && !forbiddenStrings
+}
+
 func main() {
 	var numNice int = 0
 	//Open input.txt file
@@ -75,7 +118,7 @@ func main() {
 		if scanner.Err() != nil {
 			break
 		}
-		if isLineNice(line) {
+		if isLineNice2(line) {
 			numNice++
 		}
 	}

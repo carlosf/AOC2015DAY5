@@ -25,3 +25,24 @@ func Test_isLineNice(t *testing.T) {
 		})
 	}
 }
+
+func Test_isLineNice2(t *testing.T) {
+	type args struct {
+		s string
+	}
+	tests := []struct {
+		name string
+		args args
+		want bool
+	}{
+		// TODO: Add test cases.
+		{},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := isLineNice2(tt.args.s); got != tt.want {
+				t.Errorf("isLineNice2() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
