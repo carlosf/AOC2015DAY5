@@ -68,10 +68,9 @@ func isLineNice(s string) bool {
 func isLineNice2(s string) bool {
 	var currChar rune
 	var doubleChar bool = false
-	var sb strings.Builder
 	var cleanStr string = ""
 	var stringtoCheck strings.Builder
-	var forbiddenStrings bool = false
+	var stringDup bool = false
 
 	//p(s)
 	key := 0
@@ -79,29 +78,24 @@ func isLineNice2(s string) bool {
 		// check for repeated characters
 		if key > 0 {
 			cleanStr = strRemoveAt(s, key-1, 2)
-			stringtoCheck.WriteString(string(currChar))
 			stringtoCheck.WriteString(string(s[key-1]))
+			stringtoCheck.WriteString(string(currChar))
+			p(stringtoCheck.String())
 			if strings.Contains(cleanStr, stringtoCheck.String()) {
 				doubleChar = true
-				break
+				p(stringtoCheck.String())
 			}
 			stringtoCheck.Reset()
-
-			sb.WriteString(string(s[key-1]))
-			sb.WriteString(string(currChar))
-
-			//p(sb.String())
-			if sb.String() == "ab" || sb.String() == "cd" || sb.String() == "pq" || sb.String() == "xy" {
-				forbiddenStrings = true
-				break
-				//fmt.Println("forbidden chars: ", sb.String())
-			}
-			sb.Reset()
+		}
+		// contains at least one character which repeats with exactly one letter between them
+		if key >= 2 && string(s[key-2]) == string(currChar) {
+			stringDup = true
+			p(string(s[key-2]) + string(s[key-1]) + string(currChar))
 		}
 		//check to see if there is a 'ab', 'cd', 'pq', or 'xy'
 
 	}
-	return doubleChar && !forbiddenStrings
+	return doubleChar && stringDup
 }
 
 func main() {

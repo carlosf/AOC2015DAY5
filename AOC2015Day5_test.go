@@ -35,8 +35,10 @@ func Test_isLineNice2(t *testing.T) {
 		args args
 		want bool
 	}{
-		// TODO: Add test cases.
-		{},
+		{"qjappearwqj", args{s: "qjhvhtzxzqqjkmpb"}, true},
+		{"xxyxx", args{s: "xxyxx"}, true},
+		{"uurcxstgmygtbstg", args{s: "uurcxstgmygtbstg"}, false},
+		{"ieodomkazucvgmuy", args{s: "ieodomkazucvgmuy"}, false},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
