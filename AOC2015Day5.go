@@ -80,20 +80,23 @@ func isLineNice2(s string) bool {
 			cleanStr = strRemoveAt(s, key-1, 2)
 			stringtoCheck.WriteString(string(s[key-1]))
 			stringtoCheck.WriteString(string(currChar))
-			p(stringtoCheck.String())
+			//p(stringtoCheck.String())
 			if strings.Contains(cleanStr, stringtoCheck.String()) {
 				doubleChar = true
-				p(stringtoCheck.String())
+				p("found double: " + stringtoCheck.String())
 			}
 			stringtoCheck.Reset()
 		}
 		// contains at least one character which repeats with exactly one letter between them
 		if key >= 2 && string(s[key-2]) == string(currChar) {
 			stringDup = true
-			p(string(s[key-2]) + string(s[key-1]) + string(currChar))
+			p("repeat: " + string(s[key-2]) + string(s[key-1]) + string(currChar))
 		}
 		//check to see if there is a 'ab', 'cd', 'pq', or 'xy'
 
+	}
+	if doubleChar && stringDup {
+		p(s)
 	}
 	return doubleChar && stringDup
 }
