@@ -77,7 +77,8 @@ func isLineNice2(s string) bool {
 	for key, currChar = range s {
 		// check for repeated characters
 		if key > 0 {
-			cleanStr = strRemoveAt(s, key-1, 2)
+			cleanStr = s[key+1:]
+			//strRemoveAt(s, key-1, 2)
 			stringtoCheck.WriteString(string(s[key-1]))
 			stringtoCheck.WriteString(string(currChar))
 			//p(stringtoCheck.String())
